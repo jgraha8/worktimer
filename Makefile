@@ -1,20 +1,22 @@
 CC=gcc
 CFLAGS=-O2 -Wall
 LDFLAGS=
+INSTDIR=/usr/local/bin
+EXEC=worktimer
 
-all : work
+all : $(EXEC)
 
-install : work
-	cp -v work $(INSTDIR)
+install : $(EXEC)
+	cp $(EXEC) $(INSTDIR)
 
 uninstall : 
-	rm -f $(INSTDIR)/work
+	rm -f $(INSTDIR)/$(EXEC)
 
-work : work.o
-	$(CC) -o work work.o $(LDFLAGS)
+$(EXEC) : work.o
+	$(CC) -o $(EXEC) work.o $(LDFLAGS)
 
 work.o : work.c
 	$(CC) $(CFLAGS) -c -o work.o work.c
 
 clean :
-	rm -f work *.o
+	rm -f $(EXEC) *.o
