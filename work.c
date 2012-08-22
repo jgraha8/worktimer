@@ -4,20 +4,24 @@
 #include <unistd.h>
 #include "work.h"
 
-void print_usage(void) {
+void print_usage() {
   printf("Usage: ./work [-f logfile.txt], type h for command help.\n"); 
 }
 
-void print_commands(void) {
-  printf("Commands: s[tatus], l{og} [message], r[eset]\n");
+void print_commands() {
+  printf("Commands: s[tatus], l[og] <message>, r[eset], q[uit]\n");
 }
 
-void print_log_header(void) {
+void print_prompt() {
+  printf("command> ");
+}
+
+void print_log_header() {
   fprintf(logfile, "         Start Time         Work Time            Log Message      \n");
   fprintf(logfile, "========================== =========== ===========================\n");
 }
 
-void end_session(int print_file){
+void session_status(int print_file){
   time_t now;
   time(&now);
   double time_diff = difftime(now, total_time);
@@ -41,7 +45,7 @@ void end_session(int print_file){
   }
 }
 
-int process_input(void){
+int process_input() {
   char input[MAX_INPUT]; 
   char *newstr;
   char *logmesg;
@@ -50,12 +54,12 @@ int process_input(void){
 
     if (input[0] == 'g' || input[0] == 's'){
 
-      end_session(0);
+      session_status(0);
       printf("\n");
 
     } else if (input[0] == 'l' || input[0] == 'f'){
 
-      end_session(1);
+      session_status(1);
 
       if (strlen(input) > 3){
         newstr = strstr(input, "l ");
@@ -75,13 +79,15 @@ int process_input(void){
 
     } else if (input[0] == 'r'){
       time(&total_time);
-      printf("Resetting time");
+      printf("Resetting time\n");
+    } else if (input[0] == 'q'){
+      return 0;
     } else if (input[0] == 'h'){
-      print_commands();    
+      print_commands(); 
     } else {
       print_commands();
     }
-
+    print_prompt();
     return 1;
 
   }
@@ -114,7 +120,7 @@ int main(int argc, char **argv){
   }
   
   printf("Using logfile %s, type h for help.\n", file_name);
-
+  print_prompt();
   while(process_input()){  };
   
   fclose(logfile);
