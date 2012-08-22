@@ -14,9 +14,13 @@ void end_session(int print_file){
   time_t now;
   time(&now);
   double time_diff = difftime(now, total_time);
-  printf("Elapsed Time: %i:%i on %s", (int)time_diff/60, (int)time_diff%60, ctime(&total_time));
+  printf("Elapsed Time: ");
+  if ((int)time_diff/60/60 > 0){
+    printf("%i:", (int)time_diff/60/60);
+  }
+  printf("%i:%i on %s", ((int)time_diff/60)%60, (int)time_diff%60, ctime(&total_time));
   if (print_file){
-    fprintf(sessfile, "%i:%i - %s", (int)time_diff/60, (int)time_diff%60, ctime(&total_time));
+    fprintf(sessfile, "%i:%i:%i - %s", (int)time_diff/60/60, ((int)time_diff/60)%60, (int)time_diff%60, ctime(&total_time));
   }
 }
 
@@ -49,7 +53,6 @@ int process_input(void){
   }
 }
 
-
 int main(int argc, char **argv){
   int worktype = 0;
   char *file_name;
@@ -71,7 +74,7 @@ int main(int argc, char **argv){
 
   sessfile = fopen(file_name, "a+");
 
-  while(process_input()){};
+  while(process_input()){  };
   
   fclose(sessfile);
 
