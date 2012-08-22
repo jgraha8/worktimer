@@ -21,39 +21,42 @@ void end_session(int print_file){
   time_t now;
   time(&now);
   double time_diff = difftime(now, total_time);
-  printf("Elapsed Time: ");
+
   int hours = (int)time_diff/60/60;
   int minutes = ((int)time_diff/60)%60;
   int seconds = (int)time_diff%60;
-  /* if ((int)time_diff/60/60 > 0){ */
-  /*   printf("%i:", (int)time_diff/60/60); */
-  /* } */
+
+  // Getting the starting time and strip newline character
   char *start_time = (char *)ctime(&total_time); 
   size_t len = strlen(start_time);
   start_time[len-1]='\0';
-  //printf("Hey %i is %s", (int)len, start_time);
-  //start_time[strcspn(start_time,'\n')] = '\0';
+
   char work_time[8];
   sprintf(work_time, "%i:%i:%i", hours, minutes, seconds);
-  if (print_file){
-    printf("%s\n", work_time);
-    fprintf(logfile, " %s   %8s    ", start_time, work_time);
-  } else {
-    printf("%s", work_time);
-  }
 
+  printf("Elapsed Time: %s", work_time);
+  if (print_file){
+    printf("\n");
+    fprintf(logfile, " %s   %8s    ", start_time, work_time);
+  }
 }
 
 int process_input(void){
   char input[MAX_INPUT]; 
   char *newstr;
   char *logmesg;
+
   if (fgets(input, MAX_INPUT, stdin) != NULL){
+
     if (input[0] == 'g' || input[0] == 's'){
+
       end_session(0);
       printf("\n");
+
     } else if (input[0] == 'l' || input[0] == 'f'){
+
       end_session(1);
+
       if (strlen(input) > 3){
         newstr = strstr(input, "l ");
 	logmesg = &newstr[2];
@@ -67,7 +70,9 @@ int process_input(void){
       } else {
 	  fprintf(logfile,"\n");
       }
+
       return 0;
+
     } else if (input[0] == 'r'){
       time(&total_time);
       printf("Resetting time");
@@ -75,14 +80,16 @@ int process_input(void){
       print_commands();    
     } else {
       print_commands();
-
     }
+
     return 1;
+
   }
   return 0;
 }
 
 int main(int argc, char **argv){
+
   char *file_name;
   time(&total_time);
   
@@ -96,6 +103,7 @@ int main(int argc, char **argv){
   } else {
     file_name = LOGFILE;
   }
+
   if( access( file_name, F_OK ) != -1 ) {
     // Log file exist
     logfile = fopen(file_name, "a+");
