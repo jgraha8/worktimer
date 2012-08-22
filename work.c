@@ -1,14 +1,18 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-
-#define MAX_INPUT 80
+#include 'work.h'
 
 FILE *sessfile;
 time_t total_time;
 
-void end_session(int);
-int process_input(void);
+void print_usage() {
+  printf("Usage: ./work [-f logfile.txt], type h for command help.\n"); 
+}
+
+void print_commands() {
+  printf("Commands: s[tatus], l{og} [message], r[eset]\n");
+}
 
 void end_session(int print_file){
   time_t now;
@@ -46,8 +50,11 @@ int process_input(void){
     } else if (input[0] == 'r'){
       time(&total_time);
       printf("Resetting time");
+    } else if (input[0] == 'h'){
+      print_commands();    
     } else {
-      printf("Invalid command: s[tatus], l{og} [message], r[eset]\n");
+      print_commands();
+
     }
     return 1;
   }
@@ -61,7 +68,7 @@ int main(int argc, char **argv){
   time(&total_time);
   
   if (argc == 2 && (strstr(argv[1], "--help") != NULL || strstr(argv[1], "-h") != NULL)){
-    printf("Usage: ./work [-f logfile.txt], type h for command help.\n");
+    print_usage();
     return 0;
   }
 
