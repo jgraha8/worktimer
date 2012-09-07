@@ -36,7 +36,7 @@ void session_status(int print_file){
   start_time[len-1]='\0';
 
   char work_time[8];
-  sprintf(work_time, "%i:%i:%i", hours, minutes, seconds);
+  sprintf(work_time, "%2.2i:%2.2i:%2.2i", hours, minutes, seconds);
 
   printf("Elapsed Time: %s", work_time);
   if (print_file){
@@ -52,34 +52,32 @@ int process_input() {
 
   if (fgets(input, MAX_INPUT, stdin) != NULL){
 
-    if (input[0] == 'g' || input[0] == 's'){
+    if (input[0] == 's'){
 
       session_status(0);
       printf("\n");
 
-    } else if (input[0] == 'l' || input[0] == 'f'){
-
-      session_status(1);
+    } else if (input[0] == 'l'){
 
       if (strlen(input) > 3){
         newstr = strstr(input, "l ");
 	logmesg = &newstr[2];
-        if (newstr == NULL){
-          newstr = strstr(input, "f ");
-        }
-        if (newstr == NULL){ return 0; }
-        //strncpy(newstr, "# ", 2);
-        //fputs(newstr, logfile);
-	fprintf(logfile,"%s", logmesg);
-      } else {
-	  fprintf(logfile,"\n");
-      }
+	if (newstr == NULL){ return 0; }
+	session_status(1);
+        fprintf(logfile,"%s", logmesg);
+	// Reset the time
+	time(&total_time);
 
-      return 0;
+      } else {					
+	printf("No log message specified.\n");
+	//fprintf(logfile,"\n");
+      }   
+      print_prompt();
+      return 1;
 
     } else if (input[0] == 'r'){
-      time(&total_time);
       printf("Resetting time\n");
+      time(&total_time);
     } else if (input[0] == 'q'){
       return 0;
     } else if (input[0] == 'h'){
