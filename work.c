@@ -5,7 +5,7 @@
 #include "work.h"
 
 void print_usage() {
-  printf("Usage: ./work [-f logfile.txt], type h for command help.\n"); 
+  printf("Usage: worktimer [-f logfile.txt], type h for command help.\n"); 
 }
 
 void print_commands() {
