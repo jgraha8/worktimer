@@ -1,4 +1,4 @@
-#define VERSION "0.1"
+#define VERSION "git"
 #define MAX_INPUT 80
 #define LOGFILE "worktimer.log"
 
