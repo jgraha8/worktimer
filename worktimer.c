@@ -4,8 +4,12 @@
 #include <unistd.h>
 #include "worktimer.h"
 
+void print_version() {
+  printf("worktimer version %s\n", VERSION);
+}
+
 void print_usage() {
-  printf("Usage: worktimer [-f logfile.txt], type h for command help.\n"); 
+  printf("Usage: worktimer [-v] [-f logfile.txt], type h for command help.\n"); 
 }
 
 void print_commands() {
@@ -96,6 +100,11 @@ int main(int argc, char **argv){
 
   char *file_name;
   time(&total_time);
+
+  if (argc == 2 && (strstr(argv[1], "-v") != NULL ) ) {
+    print_version();
+    return 0;
+  }
   
   if (argc == 2 && (strstr(argv[1], "--help") != NULL || strstr(argv[1], "-h") != NULL)){
     print_usage();

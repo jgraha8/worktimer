@@ -1,6 +1,8 @@
+#define VERSION "0.1"
 #define MAX_INPUT 80
 #define LOGFILE "worktimer.log"
 
+void print_version();
 void print_usage();
 void print_command();
 void print_prompt();
