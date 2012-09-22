@@ -2,7 +2,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include "work.h"
+#include "worktimer.h"
 
 void print_usage() {
   printf("Usage: worktimer [-f logfile.txt], type h for command help.\n"); 

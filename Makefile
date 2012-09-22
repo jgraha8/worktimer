@@ -12,11 +12,11 @@ install : $(EXEC)
 uninstall : 
 	rm -f $(INSTDIR)/$(EXEC)
 
-$(EXEC) : work.o
-	$(CC) -o $(EXEC) work.o $(LDFLAGS)
+$(EXEC) : worktimer.o
+	$(CC) -o $(EXEC) worktimer.o $(LDFLAGS)
 
 work.o : work.c
-	$(CC) $(CFLAGS) -c -o work.o work.c
+	$(CC) $(CFLAGS) -c -o worktimer.o worktimer.c
 
 clean :
 	rm -f $(EXEC) *.o
