@@ -3,6 +3,10 @@
 #include <time.h>
 #include <unistd.h>
 #include "worktimer.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 
 void print_version() {
   printf("worktimer version %s\n", VERSION);

@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.67])
-AC_INIT([worktimer], [1.0], [jgraha8@gmail.com])
+AC_INIT([worktimer], [0.2], [jgraha8@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
 
 AC_CONFIG_FILES([Makefile src/Makefile])
@@ -23,6 +23,5 @@ AC_TYPE_SIZE_T
 
 # Checks for library functions.
 AC_CHECK_FUNCS([strstr])
-AC_CHECK_FUNCS([cos])
 
 AC_OUTPUT
