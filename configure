@@ -557,7 +557,7 @@ PACKAGE_STRING='worktimer 1.0'
 PACKAGE_BUGREPORT='jgraha8@gmail.com'
 PACKAGE_URL=''
 
-ac_unique_file="worktimer.c"
+ac_unique_file="src"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>
@@ -2666,6 +2666,8 @@ am__tar='${AMTAR} chof - "$$tardir"'; am__untar='${AMTAR} xf -'
 
 
 
+ac_config_files="$ac_config_files Makefile src/Makefile"
+
 
 ac_config_headers="$ac_config_headers config.h"
 
@@ -4104,8 +4106,6 @@ fi
 done
 
 
-ac_config_files="$ac_config_files Makefile"
-
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -4823,9 +4823,10 @@ cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
 for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
+    "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "config.h") CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
-    "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5 ;;
   esac

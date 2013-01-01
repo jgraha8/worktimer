@@ -5,7 +5,8 @@ AC_PREREQ([2.67])
 AC_INIT([worktimer], [1.0], [jgraha8@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
 
-AC_CONFIG_SRCDIR([worktimer.c])
+AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_SRCDIR([src])
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
@@ -24,5 +25,4 @@ AC_TYPE_SIZE_T
 AC_CHECK_FUNCS([strstr])
 AC_CHECK_FUNCS([cos])
 
-AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
