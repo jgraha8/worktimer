@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <time.h>
+
 #define MAX_INPUT 80
 #define LOGFILE "worktimer.log"
 
